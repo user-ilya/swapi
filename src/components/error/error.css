@@ -1,0 +1,8 @@
+.error span{
+    display: block;
+    color: #fff;
+    text-align: center;
+}
+.boom {
+    color: #ff0000 !important;
+}

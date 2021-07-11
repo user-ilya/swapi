@@ -1,0 +1,14 @@
+.text_nav{
+    color: #00bc8c !important;
+}
+.text_nav:hover{
+    background-color:#363636;
+    border: 1px solid #363636;
+    border-radius: 5px;
+    outline: none;
+    transition: none;
+    font-weight: 500;
+}
+.navbar-brand{
+    font-size: 2rem;
+}
