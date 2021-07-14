@@ -1,5 +1,6 @@
 class SwapiService {
   _urlBase = 'https://swapi.dev/api'
+  _urlImageBase = 'https://starwars-visualguide.com/assets/img'
   async getRequest (url) {
   const res = await fetch(`${this._urlBase}${url}`)
     if(!res.ok) {
@@ -42,7 +43,15 @@ class SwapiService {
     const id = index.url.match(idRex)[1] // указание группы в скобках
     return id
   }
-  
+  getPersonImage = ({id}) => {
+    return `${this._urlImageBase}/characters/${id}.jpg`
+  }
+  getStarshipImage = ({id}) => {
+    return `${this._urlImageBase}/starships/${id}.jpg`
+  }
+  getPlanetImage = ({id}) => {
+    return `${this._urlImageBase}/planets/${id}.jpg`
+  }
    _transformPlanet = (planet) => {
     return  {
       id: this.getId(planet),
