@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SwapiService from '../../services/swapiService'
 import Loading from '../loading';
 import WarningError from '../error';
+import PropTypes from 'prop-types';
 import './randomPlanet.css'
 
 export default class RandomPlanet extends Component {
@@ -15,8 +16,9 @@ export default class RandomPlanet extends Component {
         }   
     }
     componentDidMount() {
+        const {count} = this.props
         console.log('DidMount')
-        this.interval = setInterval(this.updatePlanet, 5000)
+        this.interval = setInterval(this.updatePlanet, count )
     }
     onError = (err) => {
         this.setState({
@@ -39,8 +41,8 @@ export default class RandomPlanet extends Component {
         .catch(this.onError)
     }
     componentWillUnmount() {
-        clearInterval(this.interval)
         console.log('WillUnmount')
+        clearInterval(this.interval)
     }
     render () {
         console.log('render')
@@ -78,4 +80,19 @@ export default class RandomPlanet extends Component {
             </>
         )
     }
+}
+RandomPlanet.defaultProps = {
+    count: 1000
+}
+/* RandomPlanet.propTypes = {
+    count: (props, propsName, componentName) => {
+        const value = props[propsName];
+        if (typeof value === 'number' && !isNaN(value)) {
+            return null
+        }
+        return new TypeError(`${componentName} ${propsName} must be number !`)
+    }
+} */
+RandomPlanet.propTypes = {
+    count: PropTypes.number
 }

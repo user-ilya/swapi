@@ -41,7 +41,7 @@ class ItemDetails extends Component {
         })
     }
     componentDidUpdate(prevProps) {
-        if (this.props.itemId !== prevProps.itemId) {
+        if (this.props.itemId !== prevProps.itemId || this.props.getDate !== prevProps.getDate) {
             this.updatePerson()
         }
     }

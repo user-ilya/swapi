@@ -46,3 +46,39 @@ const withValueFromContext = (Wrapper) => {
         </Consumer>
     ) 
 }
+
+// Обновления контекста 
+Значение в контексте можно обновлять, как любое другое свойство компонента. Компоненты должны поддерживать изменения нужных свойств. componentDidUpdate() - функция в которой можно проверить, какие свойства изменились 
+
+// Функция compose() и reduceRight()
+const res = arr.reduceRight((prevResult, value) => {
+    return prevResult + value
+}, value(по умолчанию(Будет записано в самом начале))) -- Проход по массиву справа налево 
+
+const compose = (...funcs) => (Component) => {
+    return funcs.reduceRight((prevResult, f(одна из функций))=> f)(prevResult), Component)
+}
+
+// defaultProps (значения свойств по умолчанию для компонента)
+// propsTypes (позволяет проверить значение свойств (props), которые получает компонент)
+const Comp = ({name}) => {
+    return (
+        <p>{name}</p>
+    )
+}
+Comp.propTypes = {
+    name: (props, propName, componentName) => {...}
+}
+Проверка срабатывает после defaultProps.
+Функция-валидатор возвращает null или объект Error.
+ComponentName.propTypes = {
+    count: (props, propsName, componentName) => {
+        const value = props[propsName];
+        if (typeof value === 'number' && !isNaN(value)) {
+            return null
+        }
+        return new TypeError(`${componentName} ${propsName} must be number !`)
+    }
+}
+
+// Библиотека props-types - это набор стандартных функций-валидаторов. Есть и другие библиотеки, с другими валидаторами, к примеру: airbnb-prop-types

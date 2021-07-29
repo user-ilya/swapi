@@ -7,7 +7,17 @@ export default class ItemList extends Component {
     state = {
         itemList: null
     }
+    componentDidUpdate(prevProps) {
+        if (this.props.getDate !== prevProps.getDate) {
+            console.log('update listItem')
+            this.update()
+        }
+    }
     componentDidMount() {
+        this.update()
+        
+    }
+    update () {
         const {getDate} = this.props
         getDate()
         .then((itemList) => {
@@ -56,4 +66,7 @@ export default class ItemList extends Component {
             </>
         )
     }
+}
+ItemList.defaultProps = {
+    onClickItem: () => {}
 }

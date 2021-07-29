@@ -10,11 +10,12 @@ import PlanetPage from '../planetPage';
 import {SwapiServiceProvider} from '../swapiServiceContext';
 
 export default class App extends Component {
-    swapi = new SwapiService()
+
     constructor() {
         super()
         this.state = {
             toggle: false,
+            swapiService: new SwapiService()
         }
         this.onToggle = this.onToggle.bind(this)
     }
@@ -24,14 +25,24 @@ export default class App extends Component {
             toggle: !this.state.toggle
         })
     }
+    onChangeService = () => {
+        this.setState(({swapiService}) => {
+            const Service = swapiService instanceof SwapiService ? SwapiService :  SwapiService;
+            console.log('switch to new service')
+            return {
+                swapiService: new Service()
+            }
+        })
+    }
+
 
     render () {
         const content = this.state.toggle ? null : <RandomPlanet/>
         return (
             <div className='bg-dark '>
                 <div className='container-lg'>
-                    <SwapiServiceProvider value={this.swapi}>
-                        <Navbar/>
+                    <SwapiServiceProvider value={this.state.swapiService}>
+                        <Navbar onChangeService = {this.onChangeService}/>
                         {content}
                         <TogglePlanet Toggle= {this.onToggle}/>
                         <PeoplePage/>
